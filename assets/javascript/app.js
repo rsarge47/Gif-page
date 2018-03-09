@@ -1,5 +1,3 @@
-console.log("js is linked");
-
 var topics = ["Inuyasha", "Bleach", "Bugs Bunny", "The Lion King", "Animaniacs", "Rug Rats", "Doug", "Ren and Stimpy",
     "Simpsons", "Family Guy", "Futurama", "Dark Wing Duck", "Tiny Toons", "Gummy Bears", "Vampire Hunter D"];
 
@@ -33,28 +31,32 @@ $("#add-cartoon").on("click", function(event) {
 function displayCartoonPics() {
 
     var cartoon = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=x2OxiOarYR12Q6xmC4hdgi6GGplWEOc6&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=x2OxiOarYR12Q6xmC4hdgi6GGplWEOc6&limit=10&rating=g";
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
 
         var results = response.data;
+        var jifDiv = $("<div class='stuff'>");
 
         for (var i = 0; i < results.length; i++) {            
-            var gifDiv = $("<div class='item'>");            
-            var rating = results[i].rating;            
-            var p = $("<p>").text("Rating: " + rating);            
-            var cartoonImage = $("<img>");            
-            cartoonImage.attr("src", results[i].images.fixed_height_still.url);
-            cartoonImage.attr("data-still", results[i].images.fixed_height_still.url);
-            cartoonImage.attr("data-animate", results[i].images.fixed_height.url);
-            cartoonImage.attr("data-state", "still");
-            cartoonImage.addClass("gif");            
-            gifDiv.append(cartoonImage);
-            gifDiv.append(p);
-            $("#cartoons").prepend(gifDiv);            
-        }
+            if (results[i].rating !== "r") {
+                var gifDiv = $("<div class='item'>");            
+                var rating = results[i].rating;            
+                var p = $("<p>").text("Rating: " + rating);            
+                var cartoonImage = $("<img>");            
+                cartoonImage.attr("src", results[i].images.fixed_height_still.url);
+                cartoonImage.attr("data-still", results[i].images.fixed_height_still.url);
+                cartoonImage.attr("data-animate", results[i].images.fixed_height.url);
+                cartoonImage.attr("data-state", "still");
+                cartoonImage.addClass("gif");           
+                gifDiv.append(cartoonImage);
+                gifDiv.append(p);
+                jifDiv.prepend(gifDiv);            
+            };
+        };
+        $("#cartoons").prepend(jifDiv);
     });
 };
 

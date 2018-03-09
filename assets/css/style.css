@@ -12,10 +12,10 @@ body {
     margin: 10px;
     background-color: rgb(158, 66, 66);
     background-image: linear-gradient(to right,
-      rgba(0, 0, 0, .9) 25%,
-      rgba(0, 0, 0, .1) 50%,
-      rgba(0, 0, 0, .9) 75%);
-    animation: 4s linear 0s infinite alternate slider;    
+      rgba(0, 0, 0, .9) 15%,
+      rgba(0, 0, 0, .01) 50%,
+      rgba(0, 0, 0, .9) 85%);
+    animation: 3s linear 0s infinite alternate slider;    
 }
 .cartoon {
     font-family: 'Concert One', cursive;
@@ -31,8 +31,7 @@ body {
 }    
     @keyframes colors {
         from {background-color: rgb(75, 94, 197);}
-        to {background-color: rgb(116, 194, 79);}
-        
+        to {background-color: rgb(116, 194, 79);}        
     }
 
 #cartoon-form {
@@ -49,4 +48,8 @@ body {
 #container {
     font-family: 'Forum', cursive;
     font-weight: bold;
+}
+.gif {
+    border: solid 3px black;
+    margin-right: 5px;
 }
